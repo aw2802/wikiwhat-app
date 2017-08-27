@@ -1,0 +1,12 @@
+.Navbar{
+  border: 2px solid black;
+  text-align: center;
+  background: #2A313A;
+  color: white;
+  margin: 0 ;
+  padding: 2px;
+  display: block;
+  top: 0;
+  right: 0;
+  left:0;
+}
