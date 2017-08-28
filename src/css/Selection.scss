@@ -1,0 +1,22 @@
+#top-title {
+	color: $light-gray;
+}
+
+.image-holder {
+	max-width: 100%;
+	img {
+		max-width: 100%;
+		min-width: 700px;
+		text-align: center;
+	}
+}
+
+.selectOptions {
+	width: 500px;
+}
+
+option {
+	font-size: 20px;
+	text-align: center;
+	padding: 5px 0;
+}

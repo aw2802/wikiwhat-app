@@ -1,0 +1,24 @@
+.Navbar {
+  border: 2px solid $black;
+  text-align: center;
+  background: $dark-blue;
+  color: $white;
+  margin: 0 ;
+  padding: 2px;
+  display: block;
+  top: 0;
+  right: 0;
+  left:0;
+
+  .inner{
+    width:100%;
+    max-width:700px;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .info {
+    width:200px;
+    display:inline-block;
+  }
+}

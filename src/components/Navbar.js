@@ -6,13 +6,13 @@ class Navbar extends React.Component{
 		return (
 			<div className="Navbar">
 				<h1>WikiWhat</h1>
-				
+
 				<div className="inner">
-					<div id="score">
+					<div className="info">
 						<p>Score: 1 out of 10</p>
 					</div>
 
-					<div id="correctPercentage">
+					<div className="info">
 						<p>Correct: 20%</p>
 					</div>
 				</div>
