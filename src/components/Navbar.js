@@ -1,20 +1,17 @@
 import React from 'react';
-import '../css/Navbar.css';
 
 class Navbar extends React.Component{
 	render(){
 		return (
 			<div className="Navbar">
-				<h1>WikiWhat</h1>
 
+				<h1>wikiWhat?</h1>
+				
 				<div className="inner">
-					<div className="info">
-						<p>Score: 1 out of 10</p>
-					</div>
-
-					<div className="info">
-						<p>Correct: 20%</p>
-					</div>
+					<p><b>Score:</b> 1 / 10</p>
+					<p><b>Streak:</b> 2</p>
+					<p><b>Correct:</b> 20%</p>
+					<p><b>User:</b> aw2809</p>
 				</div>
 
 			</div>

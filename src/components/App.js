@@ -28,18 +28,13 @@ class App extends React.Component{
 	render(){
 		var obj = JSON.stringify(this.state.images);
 		obj = obj.split("\"");
-		
-		var titleArray = [];
-		titleArray.push(obj[7]);
-		titleArray.push(obj[11]);
-		titleArray.push(obj[15]);
 
 	    return (
 	      <div className='App'>
 	        <Navbar />
-	        <p>{titleArray[1]}</p>
+	        <img src={obj[3]} />
 	    	{/* Uses the first image as the main image */}
-	        <Selection image={obj[3]}/>
+	        <Selection/>
 	      </div>
 	    )
 	}
