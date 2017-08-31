@@ -19,6 +19,11 @@ class Login extends React.Component {
 		});
 	}
 
+	goToRegister(event) {
+		event.preventDefault();
+		this.context.router.transitionTo(`register`);
+	}
+
 	render(){
 		return (
 			<div className='account-form'>
@@ -34,7 +39,8 @@ class Login extends React.Component {
 					<button type='submit'>Login</button>
 
 					<div className="register-text">
-						<a href=' '>Don't have an account? Create one!</a>
+						<a onClick={(e) => this.goToRegister(e)}>
+							Don't have an account? Create one!</a>
 					</div>
 
 				</form>
@@ -42,5 +48,9 @@ class Login extends React.Component {
 		);
 	}
 }
+
+Login.contextTypes = {
+  router: React.PropTypes.object
+};
 
 export default Login;
