@@ -30,9 +30,9 @@ class Register extends React.Component{
 						{this.props.alert || this.state.alert}
 					</div>
 
-					<input className="form-control" type='text' placeholder='Email' required />
+					<input className="form-control" type='email' placeholder='Email' required />
 					<input className="form-control" type='text' placeholder='Username' required />
-					<input className="form-control" type='text' placeholder='Password' required />
+					<input className="form-control" type='password' placeholder='Password' required />
 
 					<button type='submit' className='btn btn-warning'>
             Register

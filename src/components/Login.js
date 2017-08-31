@@ -1,4 +1,8 @@
 import React from 'react';
+import { ApolloClient, withApollo } from 'react-apollo';
+import PropTypes from 'prop-types'; // ES6
+
+import { getLoginGQL } from '../data/login-query';
 
 class Login extends React.Component {
 	constructor(){
@@ -11,6 +15,10 @@ class Login extends React.Component {
 
 	onSubmit(event) {
 		event.preventDefault();
+
+		const query = getLoginGQL(this.username, this.password);
+		this.props.client.query({ query });
+
 		// TODO: add call to backend in regular project
 		// print out error if incorrect user/password is sent
 		this.setState({
@@ -34,8 +42,10 @@ class Login extends React.Component {
 						{this.props.alert || this.state.alert}
 					</div>
 
-					<input type='text' placeholder='Username' required />
-					<input type='text' placeholder='Password' required />
+					<input type='text' placeholder='Username'
+							ref={(input) =>  { this.username = input }} required />
+					<input type='password' placeholder='Password'
+						ref={(input) =>  { this.password = input }} required />
 					<button type='submit'>Login</button>
 
 					<div className="register-text">
@@ -50,7 +60,13 @@ class Login extends React.Component {
 }
 
 Login.contextTypes = {
-  router: React.PropTypes.object
+  router: PropTypes.object
 };
 
-export default Login;
+Login.propTypes = {
+		client: PropTypes.instanceOf(ApolloClient).isRequired
+};
+
+const LoginWithApollo = withApollo(Login);
+
+export default LoginWithApollo;
