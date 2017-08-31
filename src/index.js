@@ -4,15 +4,15 @@ import App from './components/App';
 import Login from './components/Login';
 import NotFound from './components/NotFound';
 import registerServiceWorker from './registerServiceWorker';
-import {BrowserRouter, Match, Miss} from 'react-router';
+import { BrowserRouter, Match, Miss } from 'react-router';
 
 const Root = () =>{
 	return(
 		<BrowserRouter>
 			<div>
 				<Match exactly pattern="/" component={Login} />
-				<Match exactly pattern="/loggedIn" component={App} />
-				<Miss component={NotFound} />
+				<Match exactly pattern="/user" component={App} />
+				<Miss component={ NotFound } />
 			</div>
 		</BrowserRouter>
 	)
