@@ -1,0 +1,45 @@
+.selection {
+  #top-title {
+    font-family: 'Roboto', sans-serif;
+    /*color: $main-color;*/
+  }
+
+  .selectOptions {
+    width: 700px;
+    border: 2px solid $main-color;
+  }
+
+  option {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    padding: 5px 6px;
+  }
+
+  option:checked {
+    background: linear-gradient(#A9A9A9, #A9A9A9);
+    color: white;
+  }
+
+  .resultBox {
+    margin-top: 20px;
+  }
+
+  .glyphicon {
+    font-size: 75px;
+    display: inline-block;
+    margin-right:10%;
+  }
+
+  .result {
+    display: inline-block;
+    font-size: 20px;
+
+    button {
+      color: white;
+      background-color: $main-color;
+      border: none;
+      width: 200px;
+      margin-top: 15px;
+    }
+  }
+}

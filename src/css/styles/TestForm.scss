@@ -1,0 +1,17 @@
+.test-form form {
+  margin: 0 auto;
+  width: 60%;
+
+  input, button {
+    display: block;
+    margin: 1em;
+    width: 100%;
+    padding: .5em;
+  }
+
+  button {
+    border: lightblue;
+    background-color: lightblue;
+    color: white;
+  }
+}
