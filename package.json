@@ -3,16 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.16.2",
-    "graphql": "^0.11.1",
+    "graphql": "^0.10.5",
     "husky": "^0.14.3",
     "lint-staged": "^4.0.4",
-    "node-sass-chokidar": "0.0.3",
     "npm-run-all": "^4.1.1",
     "prettier": "^1.5.3",
     "react": "^15.6.1",
+    "react-apollo": "^1.4.15",
     "react-dom": "^15.6.1",
-    "react-router": "^4.0.0-alpha.4",
+    "react-router": "4.0.0-alpha.4",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.11"
   },
@@ -26,8 +25,8 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "css-loader": "^0.28.5",
     "node-sass": "^4.5.3",
+    "react-syntax-highlight": "^15.3.1",
     "sass-loader": "^6.0.6"
   }
 }
