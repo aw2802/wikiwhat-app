@@ -9,15 +9,28 @@ class Login extends React.Component {
 		super();
 		this.state = {
 			alert: '',
-			alertClass: ''
+			alertClass: '',
+			userId: null
 		};
 	}
 
 	onSubmit(event) {
 		event.preventDefault();
 
-		const query = getLoginGQL(this.username, this.password);
-		this.props.client.query({ query });
+		// TODO: refactor for better practice
+		//TODO: this.setState can only update a mounted Component
+		// TODO: component is unmounted
+		//double clikc llogin works
+		const query = getLoginGQL(this.state.username, this.state.password);
+			this.props.client.query({ query })
+			.then((results) => {
+					const userId = results.data.login.id;
+					this.setState({ userId });
+	    });
+
+			if (this.state.userId !== null) {
+				this.context.router.transitionTo(`/user/${this.state.userId}`);
+			}
 
 		// TODO: add call to backend in regular project
 		// print out error if incorrect user/password is sent
@@ -32,6 +45,14 @@ class Login extends React.Component {
 		this.context.router.transitionTo(`register`);
 	}
 
+	handleUsernameChange(event) {
+   this.setState({ username: event.target.value });
+	}
+
+	handlePasswordChange(event) {
+	   this.setState({ password: event.target.value });
+	}
+
 	render(){
 		return (
 			<div className='account-form'>
@@ -43,9 +64,13 @@ class Login extends React.Component {
 					</div>
 
 					<input type='text' placeholder='Username'
-							ref={(input) =>  { this.username = input }} required />
+						name='username' value={this.state.username}
+						onChange={(e) => { this.handleUsernameChange(e) }} required />
+
 					<input type='password' placeholder='Password'
-						ref={(input) =>  { this.password = input }} required />
+						name='password' value={this.state.password}
+						onChange={(e) => { this.handlePasswordChange(e) }} required />
+
 					<button type='submit'>Login</button>
 
 					<div className="register-text">
