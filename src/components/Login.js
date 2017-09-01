@@ -17,11 +17,13 @@ class Login extends React.Component {
 		const query = getLoginGQL(this.state.username, this.state.password);
 		this.props.client.query({ query })
 			.then((results) => {
-					const userId = results.data.login.id;
+					const userId =
+						(results.data.login !== null) ? results.data.login.id : null;
 
 					if (userId !== null) {
-						const date = new Date();
-						setLocalStorage('user', { userId, date } );
+						const ls = setLocalStorage('user', { userId } );
+						this.setState(ls);
+
 						this.context.router.transitionTo(`/user/${userId}`);
 
 					} else {
