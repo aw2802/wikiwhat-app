@@ -1,27 +1,29 @@
 import React from 'react';
-
 import Navbar from './Navbar';
-import Selection from './Selection';
+import SelectionWithData from './Selection';
+import '../css/App.css';
 
 class App extends React.Component {
 
-	constructor(){
-		super();
+	constructor(props){
+		super(props);
 		this.state={images : []};
 	}
 
 	render(){
-		var obj = JSON.stringify(this.state.images);
-		obj = obj.split("\"");
 
 	    return (
 	      <div>
 		        <Navbar />
-		        <img src={obj[3]} />
-		        <Selection/>
+		        <SelectionWithData/>
 				</div>
 	    )
 	}
 }
 
+
 export default App;
+
+
+
+		       

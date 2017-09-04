@@ -9,17 +9,7 @@
   top: 0;
   right: 0;
   left: 0;
-
-  .title {
-    font-weight: 900;
-  }
-
-  h1 {
-    display: inline-block;
-    float: left;
-    margin: 0 5%;
-    padding-top:5px;
-  }
+  border-radius:0;
 
   .inner {
     display: inline-block;
@@ -27,6 +17,22 @@
     p {
       display: inline-block;
       margin: 16px 20px;
+      padding-top:5px;
+      color:#f9cb65;
     }
   }
+
+  .title {
+    font-weight: 900;
+    font-size: 15px;
+    color:$main-color;
+  }
+
+  img {
+    display: inline-block;
+    float: left;
+    max-width:200px;
+    margin: 0 5%;
+  }
+
 }
