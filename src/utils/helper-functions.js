@@ -13,3 +13,10 @@ export function setLocalStorage(key, value) {
 
   return newVal;
 }
+
+export function getLocalStorageItem(key) {
+  const lsKey = LS_KEYS[key];
+  const ls = localStorage.getItem(lsKey);
+
+  return JSON.parse(ls);
+}

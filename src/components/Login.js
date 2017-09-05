@@ -2,13 +2,18 @@ import React from 'react';
 import { ApolloClient, withApollo } from 'react-apollo';
 import PropTypes from 'prop-types';
 
-import { getLoginGQL } from '../data/login-query';
+import { getLoginGQL } from '../utils/queries';
 import { setLocalStorage } from '../utils/helper-functions';
 
 class Login extends React.Component {
 	constructor(){
 		super();
-		this.state = { alert: '', alertClass: '' };
+		this.state = {
+			alert: '',
+			alertClass: '',
+			username: '',
+			password: ''
+		};
 	}
 
 	onSubmit(event) {
@@ -26,7 +31,6 @@ class Login extends React.Component {
 						this.setState(ls);
 
 						this.context.router.transitionTo(`/user/${userId}`);
-
 					} else {
 						this.setState({
 							alert: 'Incorrect Username or Password. Please try again.',
@@ -55,16 +59,16 @@ class Login extends React.Component {
 				<form onSubmit={(e) => this.onSubmit(e)}>
 					<h2>Login to keep track of your score</h2>
 					<div role='alert'
-						className={`${this.props.alertClass || this.state.alertClass }`}>
-						{this.props.alert || this.state.alert}
+						className={`${ this.state.alertClass }`}>
+						{ this.state.alert }
 					</div>
 
 					<input type='text' placeholder='Username'
-						name='username' value={this.state.username || ''}
+						name='username' value={ this.state.username }
 						onChange={(e) => { this.handleUsernameChange(e) }} required />
 
 					<input type='password' placeholder='Password'
-						name='password' value={this.state.password || ''}
+						name='password' value={ this.state.password }
 						onChange={(e) => { this.handlePasswordChange(e) }} required />
 
 					<button type='submit'>Login</button>

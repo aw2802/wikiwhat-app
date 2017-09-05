@@ -1,4 +1,5 @@
 import React from 'react';
+import replace from 'lodash';
 
 class Answer extends React.Component{
 
@@ -10,36 +11,46 @@ class Answer extends React.Component{
     this.getIcon = this.getIcon.bind(this);
   }
 
+  onClick(event) {
+    console.log(this.props);
+    // this.context.router.transitionTo(`user/${this.props.params.userId}`);
+  }
+
   getTitle(isCorrect) {
-    return (isCorrect) ? 'CORRECT' : 'WRONG';
+    return (isCorrect === 'true') ? 'CORRECT' : 'WRONG';
   }
 
   getStyle(isCorrect) {
-    const color = (isCorrect) ? 'green' : 'red';
+    const color = (isCorrect === 'true') ? 'green' : 'red';
     return { color };
   }
 
   getIcon(isCorrect) {
-    return isCorrect ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove';
+    return (isCorrect === 'true') ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove';
+  }
+
+  getWikiArticle(event, article) {
+    const decoded = decodeURI(article);
+    return `http://www.wikihow.com/${replace(decoded, / /g, '-')}`;
   }
 
 	render(){
-    const { isCorrect, correctArticle } = this.props;
+    const isCorrect = this.props.params.isCorrect;
+    const correctArticle = this.props.params.article;
+
 		return (
 			<div className='selection'>
-				<h1 id='top-title'>What is the title of this wikiHow article?</h1>
-
 				<div className='resultBox'>
 					<span className={this.getIcon(isCorrect)} style={this.getStyle(isCorrect)}
              aria-hidden='true'></span>
 					<div className='result'>
 						<p>{this.getTitle(isCorrect)}</p>
             <p>
-              <a href={correctArticle.wikiURL} target='_blank'>
-                {correctArticle.title}
+              <a href={ (e) => { this.getWikiArticle(e, correctArticle) } } target='_blank'>
+                { correctArticle }
               </a>
             </p>
-						<button type='submit'>Play Again</button>
+						<button type='submit' onClick={(e) => { this.onClick(e) }}>Play Again</button>
 					</div>
 				</div>
 
@@ -47,5 +58,10 @@ class Answer extends React.Component{
 		);
 	}
 }
+
+Answer.contextTypes = {
+  router: PropTypes.object
+};
+
 
 export default Answer;

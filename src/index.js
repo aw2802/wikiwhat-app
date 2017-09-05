@@ -8,8 +8,9 @@ import {
 } from 'react-apollo';
 
 import App from './components/App';
+import Answer from './components/Answer';
 import LoginWithApollo from './components/Login';
-import Register from './components/Register';
+import RegisterWithApollo from './components/Register';
 import NotFound from './components/NotFound';
 
 import registerServiceWorker from './registerServiceWorker';
@@ -30,9 +31,11 @@ const Root = () =>{
 		<ApolloProvider client={client}>
 			<BrowserRouter>
 				<div>
-					<Match exactly pattern="/" component={ LoginWithApollo } />
-					<Match exactly pattern="/user/:userId" component={App} />
-					<Match exactly pattern="/register" component={Register} />
+					<Match exactly pattern="/" component={ App } />
+					<Match exactly pattern="/answer/:article/:isCorrect" component={ Answer } />
+					<Match exactly pattern="/login" component={ LoginWithApollo } />
+					<Match exactly pattern="/user/:userId" component={ App } />
+					<Match exactly pattern="/register" component={ RegisterWithApollo } />
 					<Miss component={ NotFound } />
 				</div>
 			</BrowserRouter>
