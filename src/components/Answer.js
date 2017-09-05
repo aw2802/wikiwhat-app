@@ -1,6 +1,8 @@
 import React from 'react';
 import replace from 'lodash';
 
+import PropTypes from 'prop-types';
+
 class Answer extends React.Component{
 
   constructor(){
