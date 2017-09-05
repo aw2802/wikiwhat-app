@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import { getLocalStorageItem } from './helper-functions';
 
 export function getLoginGQL(username, password) {
   return gql`
@@ -16,17 +17,15 @@ export function getRegisterGQL(userObject) {
       register(
         username: "${userObject.username}",
         password: "${userObject.password}",
-        email: "${userObject.email}"
       ) {
         id
         username
-      }
       }
     }
   `;
 }
 
-export function getImagesGQL(count){
+export function getImagesGQL(count) {
   return gql `
   	query wikiPicsQuery {
   		images(count: ${count}){
@@ -36,4 +35,38 @@ export function getImagesGQL(count){
   		}
   	}
   `;
+}
+
+export function getUserGQL() {
+  const user = getLocalStorageItem('user');
+  return gql `
+  	query user {
+  		user(id: ${user.userId}){
+  			id
+        username
+        score {
+          numGames
+          totalCorrect
+          streak
+        }
+  		}
+  	}
+  `;
+}
+
+export function getUpdateScoreGQL(userId, gameStats) {
+  return gql `
+  mutation {
+    updateScoring (
+      user_id: ${userId}
+      streak: ${gameStats.streak},
+      totalCorrect: ${gameStats.totalCorrect},
+      numGames: ${gameStats.numGames}
+    ) {
+      streak
+      totaCorrect
+      numGames
+    }
+  }
+`;
 }

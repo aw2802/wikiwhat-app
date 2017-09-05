@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Match, Miss } from 'react-router';
+import { BrowserRouter, Match, Miss, browserHistory } from 'react-router';
 import {
 	ApolloClient,
 	ApolloProvider,
@@ -30,7 +30,7 @@ const client = new ApolloClient({
 const Root = () =>{
 	return(
 		<ApolloProvider client={client}>
-			<BrowserRouter>
+			<BrowserRouter history={browserHistory}>
 				<div>
 					<Match exactly pattern="/" component={ Main } />
 					<Match exactly pattern="/answer/:article/:isCorrect" component={ Answer } />

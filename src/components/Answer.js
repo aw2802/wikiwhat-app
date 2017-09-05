@@ -1,6 +1,7 @@
 import React from 'react';
-
 import PropTypes from 'prop-types';
+
+import { getLocalStorageItem } from '../utils/helper-functions';
 
 class Answer extends React.Component{
 
@@ -9,10 +10,6 @@ class Answer extends React.Component{
     this.getIcon = this.getIcon.bind(this);
     this.getTitle = this.getTitle.bind(this);
   	this.getStyle = this.getStyle.bind(this);
-  }
-
-  onClick(event) {
-    console.log('TODO');
   }
 
   getTitle(isCorrect) {
@@ -33,7 +30,7 @@ class Answer extends React.Component{
     const correctArticle = this.props.correctArticle;
 
 		return (
-			<div className='resultBox'>
+			<div className='resultBox' display={!this.props.displaySelection}>
 				<span className={this.getIcon(isCorrect)} style={this.getStyle(isCorrect)}
            aria-hidden='true'></span>
 				<div className='result'>
@@ -43,15 +40,11 @@ class Answer extends React.Component{
               { correctArticle.title }
             </a>
           </p>
-					<button type='submit' onClick={(e) => { this.onClick(e) }}>Play Again</button>
+					<button type='submit' onClick={this.props.onClick}>Play Again</button>
 				</div>
 			</div>
 		);
 	}
 }
-
-Answer.contextTypes = {
-  router: PropTypes.object
-};
 
 export default Answer;

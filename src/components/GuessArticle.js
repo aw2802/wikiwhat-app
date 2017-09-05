@@ -1,11 +1,14 @@
 import React from 'react';
 import { graphql } from 'react-apollo';
 import { shuffle, camelCase, merge, isEmpty } from 'lodash';
+import { ApolloClient, withApollo } from 'react-apollo';
+import PropTypes from 'prop-types';
 
 import Answer from './Answer';
 import Selection from './Selection';
 
-import { getImagesGQL } from '../utils/queries';
+import { getImagesGQL, getUpdateScoreGQL } from '../utils/queries';
+import { setLocalStorage, getLocalStorageItem } from '../utils/helper-functions';
 
 class GuessArticle extends React.Component {
 	constructor() {
@@ -60,12 +63,47 @@ class GuessArticle extends React.Component {
 
 	playAgain() {
 		const newImages = this.generateRandomImageList();
-    const newState = {...this.state};
+    const newState = {...this.state };
+
     newState.imagesList = newImages.imagesList;
     newState.correctArticle = newImages.correctArticle;
     newState.displaySelection = true;
 
+		const isCorrect = this.state.isCorrect;
+
+		const user = getLocalStorageItem('user');
+		const mutation = getUpdateScoreGQL(user.userId, {
+			streak: (isCorrect) ? 1 : 0,
+			totaCorrect: (isCorrect) ? 1 : -1
+		});
+
+		this.props.client.mutate({ mutation })
+			.then((results) => {
+					const user =
+						(results.data.register !== null) ? results.data.register : null;
+
+					if (user !== null) {
+						const ls = setLocalStorage('user', user );
+						this.setState(ls);
+
+						this.context.router.transitionTo(`/user/${user.id}`);
+					} else {
+            this.setState({
+        			alert: 'Username already exists. Please try a new one.',
+        			alertClass: 'alert alert-danger'
+        		});
+					}
+	    })
+      .catch(error => {
+        this.setState({
+          alert: 'Username already exists. Please try a new one.',
+          alertClass: 'alert alert-danger'
+        });
+      });
+
 		this.setState(newState);
+
+		window.location.reload();
 	}
 
 	/**
@@ -73,6 +111,7 @@ class GuessArticle extends React.Component {
 		* "defaults object" if state is empty
 		*/
 	getImagesList(defaultList) {
+		console.log(!isEmpty(this.state.imagesList));
 		return (!isEmpty(this.state.imagesList)) ? this.state.imagesList : defaultList;
 	}
 
@@ -92,13 +131,12 @@ class GuessArticle extends React.Component {
   			correctArticle={ this.getCorrectArticle(defaults.correctArticle) } />;
   	} else {
   		partial = <Answer correctArticle={ this.getCorrectArticle(defaults.correctArticle) }
-  			isCorrect={this.state.isCorrect } onClick={ this.playAgain } parentState={ this.props }/>;
+  			isCorrect={this.state.isCorrect } onClick={ this.playAgain } />;
     }
 
     return (
   		<div className='selection'>
-  			<img alt='Can you guess what wikiHow article is associated?'
-  				src={ (this.getCorrectArticle(defaults.correctArticle)).imageURL } />
+  			<img src={ (this.getCorrectArticle(defaults.correctArticle)).imageURL } />
   			<h1 id='top-title'>{ title }</h1>
   			{ partial }
   		</div>
@@ -106,4 +144,8 @@ class GuessArticle extends React.Component {
 	}
 }
 
-export default graphql(getImagesGQL(4), { name: 'wikiPicsQuery' })(GuessArticle);
+GuessArticle.propTypes = {
+		client: PropTypes.instanceOf(ApolloClient).isRequired
+};
+
+export default graphql(getImagesGQL(4), { name: 'wikiPicsQuery' })(withApollo(GuessArticle));

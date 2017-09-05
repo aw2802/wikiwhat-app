@@ -29,6 +29,8 @@ class Login extends React.Component {
 						const ls = setLocalStorage('user', { userId } );
 						this.setState(ls);
 
+
+						this.context.history.push(`/user/${userId}`, {state: { userId }}) ;
 						this.context.router.transitionTo(`/user/${userId}`);
 					} else {
 						this.setState({
@@ -84,7 +86,8 @@ class Login extends React.Component {
 }
 
 Login.contextTypes = {
-  router: PropTypes.object
+  router: PropTypes.object,
+	history: PropTypes.object
 };
 
 Login.propTypes = {
