@@ -8,10 +8,11 @@ import {
 } from 'react-apollo';
 
 import App from './components/App';
+import Main from './components/Main';
 import Answer from './components/Answer';
+import NotFound from './components/NotFound';
 import LoginWithApollo from './components/Login';
 import RegisterWithApollo from './components/Register';
-import NotFound from './components/NotFound';
 
 import registerServiceWorker from './registerServiceWorker';
 import './css/main.css';
@@ -31,7 +32,7 @@ const Root = () =>{
 		<ApolloProvider client={client}>
 			<BrowserRouter>
 				<div>
-					<Match exactly pattern="/" component={ App } />
+					<Match exactly pattern="/" component={ Main } />
 					<Match exactly pattern="/answer/:article/:isCorrect" component={ Answer } />
 					<Match exactly pattern="/login" component={ LoginWithApollo } />
 					<Match exactly pattern="/user/:userId" component={ App } />

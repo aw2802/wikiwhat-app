@@ -1,5 +1,4 @@
 import React from 'react';
-import replace from 'lodash';
 
 import PropTypes from 'prop-types';
 
@@ -7,55 +6,45 @@ class Answer extends React.Component{
 
   constructor(){
   	super();
-
+    this.getIcon = this.getIcon.bind(this);
     this.getTitle = this.getTitle.bind(this);
   	this.getStyle = this.getStyle.bind(this);
-    this.getIcon = this.getIcon.bind(this);
   }
 
   onClick(event) {
-    console.log(this.props);
-    // this.context.router.transitionTo(`user/${this.props.params.userId}`);
+    console.log('TODO');
   }
 
   getTitle(isCorrect) {
-    return (isCorrect === 'true') ? 'CORRECT' : 'WRONG';
+    return (isCorrect) ? 'CORRECT' : 'WRONG';
   }
 
   getStyle(isCorrect) {
-    const color = (isCorrect === 'true') ? 'green' : 'red';
+    const color = (isCorrect) ? 'green' : 'red';
     return { color };
   }
 
   getIcon(isCorrect) {
-    return (isCorrect === 'true') ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove';
-  }
-
-  getWikiArticle(event, article) {
-    const decoded = decodeURI(article);
-    return `http://www.wikihow.com/${replace(decoded, / /g, '-')}`;
+    return (isCorrect) ? 'glyphicon glyphicon-ok' : 'glyphicon glyphicon-remove';
   }
 
 	render(){
-    const isCorrect = this.props.params.isCorrect;
-    const correctArticle = this.props.params.article;
+    const isCorrect = this.props.isCorrect;
+    const correctArticle = this.props.correctArticle;
 
 		return (
-			<div className='selection'>
-				<div className='resultBox'>
-					<span className={this.getIcon(isCorrect)} style={this.getStyle(isCorrect)}
-             aria-hidden='true'></span>
-					<div className='result'>
-						<p>{this.getTitle(isCorrect)}</p>
-            <p>
-              <a href={ (e) => { this.getWikiArticle(e, correctArticle) } } target='_blank'>
-                { correctArticle }
-              </a>
-            </p>
-						<button type='submit' onClick={(e) => { this.onClick(e) }}>Play Again</button>
-					</div>
+			<div className='resultBox'>
+				<span className={this.getIcon(isCorrect)} style={this.getStyle(isCorrect)}
+           aria-hidden='true'></span>
+				<div className='result'>
+					<p>{this.getTitle(isCorrect)}</p>
+          <p>
+            <a href={ correctArticle.wikiURL } target='_blank'>
+              { correctArticle.title }
+            </a>
+          </p>
+					<button type='submit' onClick={(e) => { this.onClick(e) }}>Play Again</button>
 				</div>
-
 			</div>
 		);
 	}
@@ -64,6 +53,5 @@ class Answer extends React.Component{
 Answer.contextTypes = {
   router: PropTypes.object
 };
-
 
 export default Answer;

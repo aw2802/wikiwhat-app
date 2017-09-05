@@ -5,7 +5,7 @@ class Navbar extends React.Component{
 		return (
 			<div className='navbar'>
 
-				<img src={require('../css/img/logo.png')} />
+				<img src={require('../css/img/logo.png')} alt="wikiWhat? logo" />
 
 				<div className='inner'>
 					<p><span className='title'>Score:</span> 20</p>

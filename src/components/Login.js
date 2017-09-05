@@ -22,7 +22,6 @@ class Login extends React.Component {
 		const query = getLoginGQL(this.state.username, this.state.password);
 		this.props.client.query({ query })
 			.then((results) => {
-					console.log(results);
 					const userId =
 						(results.data.login !== null) ? results.data.login.id : null;
 

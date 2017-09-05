@@ -2,18 +2,13 @@
   width:60%;
   margin: 20px 20%;
 
-  #top-title {
-    font-family: 'Roboto', sans-serif;
-    /*color: $main-color;*/
-  }
-
   .selectOptions {
     width: 700px;
     border: 2px solid $main-color;
+    margin-top: 1.5em;
   }
 
   option {
-    font-family: 'Roboto', sans-serif;
     font-size: 15px;
     padding: 5px 6px;
   }
