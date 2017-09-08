@@ -1,7 +1,9 @@
-##wikiWhat? App
+#wikiWhat? App
 
-Try to select the correct article title of the image!
+Try to select the correct article title of the WikiHow image!
 
-#Setup:
-`npm install react-router@4.0.0-alpha.4`
+Replication of the [damn.dog](http://damn.dog/#157) game.
+
+##Setup:
+`npm install`
 `yarn start`
